@@ -1,6 +1,11 @@
 from flask import Flask, render_template, send_from_directory
 import os
+from flask_flatpages import FlatPages
+from flask_frozen import Freezer
 app = Flask(__name__)
+app.config.from_pyfile('settings.py')
+pages = FlatPages(app)
+freezer = Freezer(app)
 
 @app.route('/')
 def index(gifs=None):
@@ -19,4 +24,5 @@ def send_gif(path):
 
 if __name__ == "__main__":
 	app.debug = True
-	app.run()
+	# app.run()
+	 main.freezer.freeze()
