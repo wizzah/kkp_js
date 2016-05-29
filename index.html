@@ -52,6 +52,7 @@
             '{{ file.path | remove_first: "/" }}'
             {% if forloop.last %}
             {% else %}
+            ,
             {% endif %}
           {% endif %}
         {% endfor %}
