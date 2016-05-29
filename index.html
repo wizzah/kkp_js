@@ -33,12 +33,6 @@
     </style>
   </head>
   <body id="container2">
-  {% assign base = '' %}
-  {% assign depth = page.url | split: '/' | size | minus: 1 %}
-  {% if    depth == 1 %}{% assign base = '.' %}
-  {% elsif depth == 2 %}{% assign base = '..' %}
-  {% elsif depth == 3 %}{% assign base = '../..' %}
-  {% elsif depth == 4 %}{% assign base = '../../..' %}{% endif %}
     <div id="container">
         <div class="square"></div>
         <div class="square"></div>
@@ -58,7 +52,6 @@
             '{{ file.path | remove_first: "/" }}'
             {% if forloop.last %}
             {% else %}
-            ,
             {% endif %}
           {% endif %}
         {% endfor %}
