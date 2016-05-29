@@ -18,8 +18,6 @@ twitter_username: jekyllrb
 github_username:  jekyll
 production_url : http://wizzah.github.io/kkp_js
 BASE_PATH : http://wizzah.github.io/kkp_js  
-collections:
-  - gifs
 
 # Build settings
 markdown: kramdown
