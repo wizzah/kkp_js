@@ -51,12 +51,11 @@
         <div class="square"></div>
     </div>
     <script>
-    console.log("{{ base }}");
       var sections = document.querySelectorAll(".square");
       var gifs = [
         {% for file in site.static_files %}
           {% if file.extname == '.gif' %}
-            "{{ base }}{{ file.path }}"
+            "{{ file.path | remove_first: '/' }}"
             {% if forloop.last %}
             {% else %}
             ,
