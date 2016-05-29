@@ -50,8 +50,8 @@
   <script>
 
     function rando_gif() {
-      var gif_length = {{gifs|tojson|safe}}.length;
-      var ran_num = Math.floor(Math.random() * gif_length);
+      //var gif_length = {{gifs|tojson|safe}}.length;
+     // var ran_num = Math.floor(Math.random() * gif_length);
       // return {{ site.gifs | jsonify}}[ran_num];
       return {{ site.gifs | sample }}
     }
