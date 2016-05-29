@@ -1,23 +1,80 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>visualizard</title>
+  <!-- <link rel="stylesheet" type="text/css" href="reset.css" /> -->
+  <style>
 
-<div class="home">
+  html, body{ 
+    width:100%; 
+    margin:0; 
+    padding:0;
+    background: black;
+    overflow: hidden;
+  }
+  #container {
+    width:100%; height:100%; margin: 0px; padding: 0px;
+  }
 
-  <h1 class="page-heading">Posts</h1>
+  .square{ 
+    padding-bottom: 30%; height: 0;width:33%; 
+    float:left; 
+    /*display: inline;*/
+    display:block;
+  }
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+  body {
+    -webkit-filter: saturate(3);
+  }
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+  </style>
+</head>
+<body id="container2">
+    {% if gifs %}
+    <div id="container">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+    {% else %}
+    <p>No gifs detected or loaded.</p>
+    {% endif %}
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+  <script>
 
-</div>
+    function rando_gif() {
+      var gif_length = {{gifs|tojson|safe}}.length;
+      var ran_num = Math.floor(Math.random() * gif_length);
+      return {{gifs|tojson|safe}}[ran_num];
+    }
+
+    document.getElementById("container2").style.backgroundImage = "url(gifs/"+rando_gif()+")";
+
+    var sections = document.querySelectorAll(".square");
+    for(var i = 0; i < sections.length; i++) {
+      var rando = rando_gif();
+      var new_gif = document.createElement("img");
+      new_gif.src = "gifs/"+rando;
+      sections[i].appendChild(new_gif);
+    }
+
+    setInterval(function() {
+      //randomly grab one of the sections to update
+      var ran_num = Math.floor(Math.random() * sections.length);
+      document.querySelectorAll("img")[ran_num].src = "gifs/"+rando_gif();
+    }, 1000);
+
+    setInterval(function() {
+      document.getElementById("container2").style.backgroundImage = "url(gifs/"+rando_gif()+")";
+    }, 2000)
+
+  </script>
+</body>
+</html>
