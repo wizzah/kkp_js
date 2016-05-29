@@ -52,7 +52,8 @@
     function rando_gif() {
       var gif_length = {{gifs|tojson|safe}}.length;
       var ran_num = Math.floor(Math.random() * gif_length);
-      return {{gifs|tojson|safe}}[ran_num];
+      // return {{ site.gifs | jsonify}}[ran_num];
+      return {{ site.gifs | sample }}
     }
 
     document.getElementById("container2").style.backgroundImage = "url(gifs/"+rando_gif()+")";
