@@ -31,7 +31,7 @@
   </style>
 </head>
 <body id="container2">
-    {% if site.gifs %}
+    {% if site.gifs.files %}
     <div id="container">
         <div class="square"></div>
         <div class="square"></div>
@@ -53,6 +53,22 @@
       //var gif_length = {{gifs|tojson|safe}}.length;
      // var ran_num = Math.floor(Math.random() * gif_length);
       // return {{ site.gifs | jsonify}}[ran_num];
+      ---
+      ---
+      {% capture posts %}
+      [
+      {% for post in site.posts %}
+      {
+      "title"    : "{{ post.title }}",
+      "url"      : "{{ post.url }}",
+      "date"     : "{{ post.date | date: "%B %d, %Y" }}",
+      "content"  : "{{ post.content | escape }}"
+      } {% if forloop.last %}{% else %},{% endif %}
+      {% endfor %}
+      ]
+      {% endcapture %}
+      var posts = {{posts | strip_newlines}}
+      var rando_gif = {{rando_gif | strip_newlines}}
       return {{ site.gifs | sample }}
     }
 
