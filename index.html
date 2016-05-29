@@ -55,7 +55,7 @@
       var gifs = [
         {% for file in site.static_files %}
           {% if file.extname == '.gif' %}
-            "{{ file.path | remove_first: '/' }}"
+            '{{ file.path | remove_first: "/" }}'
             {% if forloop.last %}
             {% else %}
             ,
