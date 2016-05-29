@@ -33,6 +33,12 @@
     </style>
   </head>
   <body id="container2">
+  {% assign base = '' %}
+  {% assign depth = page.url | split: '/' | size | minus: 1 %}
+  {% if    depth == 1 %}{% assign base = '.' %}
+  {% elsif depth == 2 %}{% assign base = '..' %}
+  {% elsif depth == 3 %}{% assign base = '../..' %}
+  {% elsif depth == 4 %}{% assign base = '../../..' %}{% endif %}
     <div id="container">
         <div class="square"></div>
         <div class="square"></div>
@@ -45,11 +51,12 @@
         <div class="square"></div>
     </div>
     <script>
+    console.log("{{ base }}");
       var sections = document.querySelectorAll(".square");
       var gifs = [
         {% for file in site.static_files %}
           {% if file.extname == '.gif' %}
-            "{{ file.path }}"
+            "{{ base }}{{ file.path }}"
             {% if forloop.last %}
             {% else %}
             ,
